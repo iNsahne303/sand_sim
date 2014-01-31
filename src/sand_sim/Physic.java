@@ -15,23 +15,24 @@ public class Physic {
 		y_length = display.y_length;
 	}
 	
-	public void run(){			// Caps Ticks and Frames per Second
+	public void run(){				// Caps Ticks and Frames per Second
 		boolean running = true;
 		double lastTime = System.currentTimeMillis();
+		double waitMillis = 600;// Amount of Milliseconds to wait between ticks
 		
 		while(running == true){
-			if((lastTime+600)<System.currentTimeMillis()){
-				this.tick();
-				lastTime = System.currentTimeMillis();
+			if((lastTime+waitMillis)<System.currentTimeMillis()){// Ticks once if more than x Milliseconds have past since the last tick
+				running = this.tick();// Ticks the game and stops the while-loop when no block got moved
+				lastTime = System.currentTimeMillis();// Reset lastTime
 			}
 		}
 	}
 	
-	public void tick(){
+	public boolean tick(){			// Calls display.draw() and moves every sandblock once
 		display.draw();
 		int i = 0;
 		int j = 0;
-		didChange = false;
+		didChange = false;			// Boolean to test if there was at least one block that moved
 		feld = display.feld;
 		
 		for(i=y_length-1;i>=1;i--){
@@ -44,9 +45,7 @@ public class Physic {
 				}
 			}
 		}
-		if(didChange == false){
-			this.running = false;
-		}
+		return didChange;			// If no block got moved, this will return false and stop physic.run() 
 	}
 	
 }
