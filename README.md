@@ -15,6 +15,10 @@ Feel free to use all code you find here.
 
 2. Input is the content that will be insertet into the field
 
+0=Air 
+1=Stone
+2=Sand
+
 ex. 
 
 	Field X by X, choose X: 5
